@@ -39,6 +39,9 @@ export class SignInComponent implements OnInit {
           data = users;
           this.us.setUser(data);
           this.loggedIn = true;
+        } else {
+          alert('Could not create or find user.');
+          console.log('This is the result: ' + users);
         }
         // let found = false;
         // for (let i = 0; i < users.length; i++) {
