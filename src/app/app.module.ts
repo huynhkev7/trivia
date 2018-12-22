@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     data: { title: 'Edit Boards' }
   },
   { path: '',
-    redirectTo: '/boards',
+    redirectTo: '/sign-in',
     pathMatch: 'full'
   },
   {

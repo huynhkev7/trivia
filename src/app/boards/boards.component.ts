@@ -65,13 +65,13 @@ export class BoardsComponent implements OnInit {
         if (user !== null) {
           user['points'] = Number(user['points']) + Number(this.dataSource[0]['points']);
           this.fs.postAnswer(user['id'], user);
-          alert('correct!');
+          //alert('correct!');
           this.us.setToFalse();
         } else {
           alert('Please sign in');
         }
       } else if (form['chosenAnswer'] !== null) {
-        alert('wrong!');
+        //alert('wrong!');
         this.us.setToFalse();
       } else {
         alert('Please select an option');
