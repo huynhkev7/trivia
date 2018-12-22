@@ -27,25 +27,35 @@ export class SignInComponent implements OnInit {
   public login(username) {
     if (username !== undefined  && username !== null && username.replace(/\s/g, '').length > 0) {
       let data = {
-        username: username.toLowerCase()
+        id: username.toLowerCase()
       };
       this.fs.login(data).subscribe(users => {
-        let found = false;
-        for (let i = 0; i < users.length; i++) {
-          if (users[i]['username'] === data['username']) {
-            found = true;
-            data = users[i];
-          }
-        }
-        if (found === true) {
-          this.us.setUser(data);
-          this.loggedIn = true;
-        } else {
+        if (users === undefined || users === null) {
           data['points'] = 0;
           this.fs.addUser(data);
           this.us.setUser(data);
           this.loggedIn = true;
+        } else if (users['id'] === data['id']) {
+          data = users;
+          this.us.setUser(data);
+          this.loggedIn = true;
         }
+        // let found = false;
+        // for (let i = 0; i < users.length; i++) {
+        //   if (users[i]['id'] === data['username']) {
+        //     found = true;
+        //     data = users[i];
+        //   }
+        // }
+        // if (found === true) {
+        //   this.us.setUser(data);
+        //   this.loggedIn = true;
+        // } else {
+        //   data['points'] = 0;
+        //   this.fs.addUser(data);
+        //   this.us.setUser(data);
+        //   this.loggedIn = true;
+        // }
         // for (const user in users) {
         //   if (user['username'] === data['username']) {
         //     found = true;

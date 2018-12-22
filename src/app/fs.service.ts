@@ -59,17 +59,21 @@ export class FsService {
   }
 
   login(data): Observable<any> {
-    return this.db.collection('/users').snapshotChanges()
-    .pipe(map(actions => actions.map((obj: any) => {
-      const object = obj.payload.doc.data();
-      object.id = obj.payload.doc.id;
-      return object;
-    })));
+    // return this.db.collection('/users').snapshotChanges()
+    // .pipe(map(actions => actions.map((obj: any) => {
+    //   const object = obj.payload.doc.data();
+    //   object.id = obj.payload.doc.id;
+    //   return object;
+    // })));
+    const itemDoc = this.db.doc(`users/${data.id}`);
+    return itemDoc.valueChanges();
   }
+
   addUser(data: object): Promise<any> {
     return this.db
     .collection('users')
-    .add(JSON.parse(JSON.stringify(data)));
+    .doc(data['id'])
+    .set(JSON.parse(JSON.stringify(data)));
   }
 
   getAllUsers(): Observable<any> {
@@ -78,7 +82,7 @@ export class FsService {
     .pipe(map(actions => actions.map((obj: any) => {
         const object = obj.payload.doc.data();
         return {
-          'username': object['username'],
+          'username': obj.payload.doc.id,
           'points': object['points']
         };
     })));
