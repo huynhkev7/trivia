@@ -16,6 +16,10 @@ import {
   MatRadioButton,
   MatMenuModule
 } from '@angular/material';
+
+// For MDB Angular Free
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -92,7 +96,8 @@ const appRoutes: Routes = [
     MatCardModule,
     MatFormFieldModule,
     MatRadioModule,
-    MatMenuModule
+    MatMenuModule,
+    ChartsModule, WavesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

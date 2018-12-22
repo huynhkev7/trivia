@@ -25,6 +25,40 @@ export class BoardsComponent implements OnInit {
   //   answer: 1
   // };
 
+  public chartType: String = 'horizontalBar';
+
+  public chartDatasets: Array<any> = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Ranking' }
+  ];
+
+  public chartLabels: Array<any> = [];
+
+  public chartColors: Array<any> = [
+    {
+      // backgroundColor: [
+      //   'rgba(255, 99, 132, 0.2)',
+      //   'rgba(54, 162, 235, 0.2)',
+      //   'rgba(255, 206, 86, 0.2)',
+      //   'rgba(75, 192, 192, 0.2)',
+      //   'rgba(153, 102, 255, 0.2)',
+      //   'rgba(255, 159, 64, 0.2)'
+      // ],
+      // borderColor: [
+      //   'rgba(255,99,132,1)',
+      //   'rgba(54, 162, 235, 1)',
+      //   'rgba(255, 206, 86, 1)',
+      //   'rgba(75, 192, 192, 1)',
+      //   'rgba(153, 102, 255, 1)',
+      //   'rgba(255, 159, 64, 1)'
+      // ],
+      borderWidth: 2
+    }
+  ];
+
+  public chartOptions: any = {
+    responsive: true
+  };
+
   constructor(private fs: FsService, private formBuilder: FormBuilder, private us: UserServiceService) {
     // this.us.turnOff();
     // this.shouldDisable = this.us.getDisableFlag();
@@ -46,6 +80,14 @@ export class BoardsComponent implements OnInit {
 
     this.fs.getAllUsers().subscribe(userData => {
       this.users = userData;
+      const tempArrayStats = [];
+      const tempUsers = [];
+      for (let i = 0; i < this.users.length; i++) {
+        tempArrayStats.push(Number(this.users[i]['points']));
+        tempUsers.push(this.users[i]['username']);
+      }
+      this.chartDatasets[0]['data'] = tempArrayStats;
+      this.chartLabels = tempUsers;
     });
   // this.dataSource = [{
   //   question: 'is a water chestnut a nut?',
@@ -88,5 +130,9 @@ export class BoardsComponent implements OnInit {
     //       console.log(err);
     //     });
   }
+
+  public chartClicked(e: any): void { }
+
+  public chartHovered(e: any): void { }
 
 }
