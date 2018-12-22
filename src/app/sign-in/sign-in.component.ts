@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
@@ -12,6 +12,7 @@ import { database } from 'firebase';
 })
 export class SignInComponent implements OnInit {
   loggedIn: boolean;
+  @Input() username: String;
   constructor(private fs: FsService, private us: UserServiceService) {
     this.loggedIn = false;
   }
@@ -24,9 +25,9 @@ export class SignInComponent implements OnInit {
   }
 
   public login(username) {
-    if (username !== null && username.length > 0) {
+    if (username !== undefined  && username !== null && username.replace(/\s/g, '').length > 0) {
       let data = {
-        username: username
+        username: username.toLowerCase()
       };
       this.fs.login(data).subscribe(users => {
         let found = false;
@@ -58,8 +59,8 @@ export class SignInComponent implements OnInit {
         //   this.us.setUser(data);
         // }
       }, () => {});
-    }else{
-      alert('cannot be null');
+    } else {
+      alert('cannot be empty');
     }
 
   }

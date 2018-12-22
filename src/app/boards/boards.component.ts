@@ -13,10 +13,11 @@ import { e } from '@angular/core/src/render3';
 })
 export class BoardsComponent implements OnInit {
   boardsForm: FormGroup;
-  displayedColumns = ['title', 'description', 'author'];
+  displayedColumns = ['username', 'points'];
   dataSource: Array<Object>;
   dataObject: Array<Object>;
   shouldDisable: boolean;
+  users: Array<Object>;
   //dataSource = new BoardDataSource(this.fs);
   // dataObject = {
   //   question: 'is a water chestnut a nut?',
@@ -41,6 +42,10 @@ export class BoardsComponent implements OnInit {
         this.us.setToTrue();
       }
       this.dataSource = portfolioData;
+    });
+
+    this.fs.getAllUsers().subscribe(userData => {
+      this.users = userData;
     });
   // this.dataSource = [{
   //   question: 'is a water chestnut a nut?',
@@ -74,7 +79,6 @@ export class BoardsComponent implements OnInit {
     } else {
       alert('Please sign in');
     }
-
 
     // this.fs.postBoards(form)
     //   .subscribe(res => {

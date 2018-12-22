@@ -33,3 +33,29 @@
           <button type="submit" mat-fab color="primary"><mat-icon>how_to_vote</mat-icon></button>
         </div>
       </form>
+
+
+      <table mat-table #table [dataSource]="users">
+      
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        <!-- <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element" class="title-col"> {{element.id}} </td>
+          </ng-container> -->
+
+          <!-- Title Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element" class="title-col"> {{element.username}} </td>
+          </ng-container>
+      
+          <!-- Description Column -->
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Points </th>
+            <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
