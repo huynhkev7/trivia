@@ -11,14 +11,22 @@ import {
   MatIconModule,
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule } from "@angular/material";
-
+  MatFormFieldModule,
+  MatRadioModule,
+  MatRadioButton,
+  MatMenuModule
+} from '@angular/material';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BoardsComponent } from './boards/boards.component';
 import { BoardsDetailComponent } from './boards-detail/boards-detail.component';
 import { BoardsCreateComponent } from './boards-create/boards-create.component';
 import { BoardsEditComponent } from './boards-edit/boards-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { StatsComponent } from './stats/stats.component';
 
 const appRoutes: Routes = [
   {
@@ -44,6 +52,14 @@ const appRoutes: Routes = [
   { path: '',
     redirectTo: '/boards',
     pathMatch: 'full'
+  },
+  {
+    path: 'sign-in',
+    component: SignInComponent
+  },
+  {
+    path: 'stats',
+    component: StatsComponent
   }
 ];
 
@@ -53,9 +69,13 @@ const appRoutes: Routes = [
     BoardsComponent,
     BoardsDetailComponent,
     BoardsCreateComponent,
-    BoardsEditComponent
+    BoardsEditComponent,
+    SignInComponent,
+    StatsComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     BrowserAnimationsModule,
@@ -70,7 +90,9 @@ const appRoutes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatRadioModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

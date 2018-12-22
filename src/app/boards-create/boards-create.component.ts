@@ -35,4 +35,13 @@ export class BoardsCreateComponent implements OnInit {
         });
   }
 
+  public login(username) {
+    const data = {
+      username: username
+    };
+    this.fs.getBoardActive().subscribe(portfolioData => {
+      alert(portfolioData);
+    });
+  }
+
 }

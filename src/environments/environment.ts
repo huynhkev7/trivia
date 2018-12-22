@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase : {
+    apiKey: 'AIzaSyB4Vy-3nGM6KyKvEemtvDOtc8hlcSVaKxI',
+    authDomain: 'trivia-poll-game.firebaseapp.com',
+    databaseURL: 'https://trivia-poll-game.firebaseio.com',
+    projectId: 'trivia-poll-game',
+    storageBucket: 'trivia-poll-game.appspot.com',
+    messagingSenderId: '356882557715'
+  }
 };
 
 /*
